@@ -1,0 +1,29 @@
+Create Table computer 
+(
+comp_id number auto_increment,
+comp_name varchar2(30) NOT NULL,
+com_Company varchar2(30) NOT NULL,
+com_Generation varcar2(30) NOT NULL,
+com_Creation_date Date  defualt SYSDATE
+);
+-- LOG TABLE FOR TRIGGER
+Create table computer_log
+(
+com_log_ID number ,
+com_log_date DATE 
+);
+--OUR TRIGGER FOR THIS TABLE 
+CREATE or replace TRIGGER FIRST_TRGGER 
+AFTER INSERT ON COMPUTER 
+REFERENCING OLD AS OLD NEW AS NEW 
+FOR EACH ROW
+BEGIN
+ insert  into  COMPUTER_LOGS
+ (compter_id , insert_log_date)
+VALUES
+ (: new.computer_id,
+ :new.COMPUTER_SALE_dATE);
+END;
+--WHEN EVER WE ENTER THE DATA INTO PARENT TABLE SO EXACTLY WE WILL HAVE DATA IN SECOND TABLE 
+--HABIBI
+
